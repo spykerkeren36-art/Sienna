@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sienna's June Exam Schedule 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#120a0f;--surface:#1c1018;--card:#221420;--card2:#2a1828;--border:#3d1f35;--plum:#7c2d60;--plum-bright:#a83d80;--rose:#e879a0;--pink:#f4a7c4;--maroon:#8b1a3a;--mauve:#c084a8;--gold:#f9c74f;--text:#f0dde8;--muted:#8a6070;--white:#fdf0f6;--berry:#9d3060;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;min-height:100vh;}
+header{background:var(--surface);padding:2rem 1.5rem 1.6rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(168,61,128,.25) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(244,167,196,.14) 0%,transparent 50%);}
+header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--maroon),var(--plum-bright),var(--rose),var(--pink),var(--plum-bright),var(--maroon));background-size:300% 100%;animation:shimmer 5s linear infinite;}
+@keyframes shimmer{0%{background-position:0% 0%}100%{background-position:300% 0%}}
+header h1{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,5vw,2.8rem);font-weight:800;letter-spacing:-.03em;position:relative;background:linear-gradient(135deg,#f4a7c4 0%,#e879a0 45%,#a83d80 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+header p{margin-top:.4rem;font-size:.78rem;color:var(--muted);position:relative;letter-spacing:.05em;text-transform:uppercase;}
+.prog-wrap{background:var(--surface);border-bottom:1px solid var(--border);padding:.65rem 1.2rem;display:flex;align-items:center;gap:.9rem;}
+.prog-label{font-size:.68rem;font-weight:600;color:var(--mauve);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;}
+.prog-track{flex:1;height:6px;background:var(--border);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--maroon),var(--rose));border-radius:99px;transition:width .5s ease;}
+.prog-stars{font-size:.73rem;color:var(--gold);white-space:nowrap;font-weight:600;}
+.tab-bar{display:flex;overflow-x:auto;background:var(--surface);padding:0 .5rem;border-bottom:1px solid var(--border);scrollbar-width:none;gap:.1rem;}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab{flex-shrink:0;padding:.7rem .95rem;font-size:.68rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;letter-spacing:.05em;text-transform:uppercase;}
+.tab:hover{color:var(--pink);}
+.tab.active{color:var(--rose);border-bottom-color:var(--rose);}
+.tab-content{display:none;padding:1.3rem 1rem 3rem;max-width:820px;margin:0 auto;}
+.tab-content.active{display:block;}
+.motivation{background:linear-gradient(135deg,#2a0d1f,#1c0a16);border:1px solid rgba(168,61,128,.3);border-radius:14px;padding:1.1rem 1.4rem;margin-bottom:1.4rem;font-size:.9rem;line-height:1.6;text-align:center;font-style:italic;color:var(--pink);}
+.motivation::before{content:'✦ ';color:var(--rose);font-style:normal;}
+.motivation::after{content:' ✦';color:var(--rose);font-style:normal;}
+.week-label{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white);margin:1.5rem 0 .8rem;padding-bottom:.45rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.55rem;letter-spacing:-.01em;}
+.week-badge{background:linear-gradient(135deg,var(--maroon),var(--plum-bright));color:#fde8f2;font-family:'Plus Jakarta Sans',sans-serif;font-size:.58rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:.18rem .5rem;border-radius:5px;}
+.section-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600;color:var(--muted);margin:1.1rem 0 .55rem;}
+.day-card{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:.75rem;overflow:hidden;transition:border-color .2s;}
+.day-card:hover{border-color:rgba(168,61,128,.5);}
+.day-card.open{border-color:rgba(232,121,160,.45);}
+.day-card.done{border-color:rgba(249,199,79,.4);}
+.day-off .day-header{opacity:.4;}
+.exam-day{border-color:rgba(232,121,160,.22);}
+.exam-day .day-header{background:linear-gradient(90deg,rgba(139,26,58,.12),transparent);}
+.day-header{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.15rem;cursor:pointer;user-select:none;}
+.day-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.93rem;color:var(--white);display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;}
+.day-date{font-size:.72rem;color:var(--muted);font-weight:400;font-family:'Plus Jakarta Sans',sans-serif;}
+.day-subjects{display:flex;flex-wrap:wrap;gap:.28rem;margin-top:.28rem;}
+.chevron{font-size:.7rem;color:var(--muted);transition:transform .25s;flex-shrink:0;}
+.day-card.open .chevron{transform:rotate(180deg);color:var(--rose);}
+.done-badge{font-size:.58rem;font-weight:700;background:rgba(249,199,79,.18);color:var(--gold);border:1px solid rgba(249,199,79,.35);padding:.13rem .4rem;border-radius:4px;text-transform:uppercase;letter-spacing:.05em;display:none;margin-left:.3rem;}
+.day-card.done .done-badge{display:inline-block;}
+.day-off-badge{font-size:.6rem;background:rgba(100,60,80,.25);color:var(--muted);padding:.13rem .45rem;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
+.sessions{display:none;padding:0 1.15rem 1.15rem;}
+.day-card.open .sessions{display:block;}
+.session{display:flex;gap:.85rem;margin-bottom:.7rem;align-items:flex-start;}
+.session-time{font-size:.65rem;font-weight:600;color:var(--muted);min-width:88px;padding-top:.55rem;flex-shrink:0;letter-spacing:.02em;}
+.session-block{flex:1;border-radius:9px;padding:.6rem .85rem;border-left:3px solid transparent;transition:opacity .2s,filter .2s;}
+.session-block.completed{opacity:.45;filter:saturate(.25);}
+.session-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.45rem;}
+.session-title{font-weight:600;font-size:.8rem;margin-bottom:.18rem;color:var(--white);flex:1;}
+.star-btn{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all .2s;color:var(--muted);margin-top:-1px;}
+.star-btn:hover{border-color:var(--gold);color:var(--gold);transform:scale(1.15);}
+.star-btn.starred{border-color:var(--gold);background:rgba(249,199,79,.15);color:var(--gold);}
+@keyframes popIn{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.3)}100%{transform:scale(1);opacity:1}}
+.star-btn.starred{animation:popIn .3s ease;}
+.session-tasks{font-size:.74rem;line-height:1.62;color:var(--text);opacity:.82;}
+.session-tasks li{list-style:none;padding-left:.95rem;position:relative;}
+.session-tasks li::before{content:'›';position:absolute;left:.05rem;font-weight:700;opacity:.55;}
+.session-break{display:flex;align-items:center;gap:.45rem;font-size:.68rem;color:var(--muted);padding:.3rem 0;margin-bottom:.35rem;}
+.session-break::before,.session-break::after{content:'';flex:1;height:1px;background:var(--border);}
+.c-eng{background:rgba(124,45,96,.18);border-left-color:#c06090;}
+.c-afr{background:rgba(139,26,58,.2);border-left-color:var(--maroon);}
+.c-bs{background:rgba(157,48,96,.16);border-left-color:var(--berry);}
+.c-mlit{background:rgba(168,61,128,.18);border-left-color:var(--plum-bright);}
+.c-ls{background:rgba(232,121,160,.12);border-left-color:var(--rose);}
+.c-des{background:rgba(244,167,196,.1);border-left-color:var(--pink);}
+.pill-eng{background:rgba(124,45,96,.3);color:#f0a0cc;}
+.pill-afr{background:rgba(139,26,58,.3);color:#f07090;}
+.pill-bs{background:rgba(157,48,96,.28);color:#e888b8;}
+.pill-mlit{background:rgba(168,61,128,.28);color:var(--mauve);}
+.pill-ls{background:rgba(232,121,160,.2);color:var(--rose);}
+.pill-des{background:rgba(244,167,196,.18);color:var(--pink);}
+.subject-pill{font-size:.6rem;font-weight:600;padding:.15rem .5rem;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:1.2rem;}
+.cal-head{text-align:center;font-size:.6rem;font-weight:600;color:var(--muted);text-transform:uppercase;padding:.4rem 0;letter-spacing:.06em;}
+.cal-day{min-height:58px;border-radius:7px;padding:.3rem .35rem;font-size:.65rem;position:relative;background:var(--card);border:1px solid var(--border);}
+.cal-day.empty{background:transparent;border-color:transparent;}
+.cal-day .dn{font-weight:600;color:var(--muted);font-size:.62rem;}
+.cal-day.exam-cal{background:rgba(139,26,58,.25);border-color:rgba(232,121,160,.4);}
+.cal-day.holiday-cal{background:rgba(61,31,53,.3);border-color:var(--border);}
+.cal-day.study-cal{background:rgba(124,45,96,.12);}
+.exam-tag{font-size:.55rem;font-weight:600;color:var(--rose);line-height:1.3;margin-top:.15rem;display:block;}
+.holiday-tag{font-size:.55rem;color:var(--muted);font-style:italic;margin-top:.15rem;display:block;}
+.cal-month{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin-bottom:.6rem;}
+.exam-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:.5rem;border-radius:11px;overflow:hidden;}
+.exam-table th{text-align:left;padding:.6rem .85rem;background:rgba(139,26,58,.25);color:var(--pink);font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600;}
+.exam-table td{padding:.6rem .85rem;border-bottom:1px solid var(--border);vertical-align:top;background:var(--card);}
+.exam-table tr:last-child td{border-bottom:none;}
+.exam-table tr:nth-child(even) td{background:var(--card2);}
+.exam-subject{font-weight:600;color:var(--white);}
+.exam-date-col{color:var(--rose);white-space:nowrap;font-weight:500;}
+.exam-time-col{white-space:nowrap;font-size:.7rem;color:var(--muted);}
+.check-subject{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--white);margin:1.5rem 0 .7rem;padding:.5rem .9rem;background:linear-gradient(135deg,rgba(139,26,58,.35),rgba(124,45,96,.2));border-left:3px solid var(--rose);border-radius:0 8px 8px 0;}
+.check-section{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--mauve);margin:.9rem 0 .35rem .2rem;}
+.check-item{display:flex;align-items:flex-start;gap:.7rem;padding:.45rem .5rem;border-bottom:1px solid rgba(61,31,53,.6);cursor:pointer;transition:background .15s;border-radius:5px;}
+.check-item:hover{background:rgba(124,45,96,.1);}
+.check-item.checked .check-text{text-decoration:line-through;opacity:.45;}
+.check-box{width:16px;height:16px;min-width:16px;border:1.5px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.65rem;transition:all .15s;margin-top:1px;}
+.check-item.checked .check-box{background:var(--rose);border-color:var(--rose);color:#fff;}
+.check-text{font-size:.77rem;line-height:1.5;color:var(--text);}
+.checklist-progress{font-size:.68rem;color:var(--mauve);margin:.35rem 0 .6rem .2rem;font-weight:500;}
+.tip-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1rem 1.2rem;margin-bottom:.8rem;transition:border-color .2s;}
+.tip-card:hover{border-color:rgba(168,61,128,.4);}
+.tip-card h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.35rem;color:var(--rose);}
+.tip-card p{font-size:.77rem;line-height:1.65;color:var(--text);opacity:.85;}
+@media(max-width:480px){.session{flex-direction:column;gap:.25rem;}.session-time{min-width:unset;}.cal-day{min-height:44px;}.exam-tag{font-size:.5rem;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Sienna's June Exams 2026</h1>
+  <p>Grade 12 · Personalised Study Plan · 14 May – 23 June</p>
+</header>
+<div class="prog-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <span class="prog-stars" id="progStars">⭐ 0 stars</span>
+  <button onclick="resetAll()" title="Reset all progress" style="flex-shrink:0;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.6rem;padding:.2rem .5rem;border-radius:4px;cursor:pointer;font-family:inherit;letter-spacing:.04em;text-transform:uppercase;font-weight:600;">Reset</button>
+</div>
+<div class="tab-bar">
+  <div class="tab active" onclick="showTab('prep1')">📚 Prep Wk 1</div>
+  <div class="tab" onclick="showTab('prep2')">📚 Prep Wk 2</div>
+  <div class="tab" onclick="showTab('prep3')">📚 Prep Wk 3</div>
+  <div class="tab" onclick="showTab('exams1')">✏️ Exams Wk 1</div>
+  <div class="tab" onclick="showTab('exams2')">✏️ Exams Wk 2</div>
+  <div class="tab" onclick="showTab('exams3')">✏️ Exams Wk 3</div>
+  <div class="tab" onclick="showTab('calendar')">📅 Calendar</div>
+  <div class="tab" onclick="showTab('dates')">📋 Exam Dates</div>
+  <div class="tab" onclick="showTab('checklist')">✅ Checklist</div>
+  <div class="tab" onclick="showTab('tips')">💡 Tips</div>
+</div>
+<!-- PREP WEEK 1 -->
+<div id="prep1" class="tab-content active">
+<div class="motivation">"You don't need to feel ready. You just need to start."</div>
+<p class="section-label">14–18 May · Study 4–7pm on school days · Heavy Business Studies focus</p>
+<div class="week-label">Week 1 <span class="week-badge">14–18 May</span></div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Wednesday <span class="day-date">14 May</span></div><div class="day-subjects"><span class="subject-pill pill-bs">Business Studies</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: MICRO environment</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write out every MICRO component: owners, employees, customers, suppliers, competitors, intermediaries — define each in your own words</li><li>Draw a mind map with MICRO at the centre — branch to each component with a restaurant example</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:15–6:15</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: MARKET environment — Porter's 6 Forces</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write out each of Porter's 6 Forces with a full definition</li><li>For each force write one restaurant example (e.g. threat of new entrants = a new restaurant opening nearby)</li><li>Cover your notes and test: can you name all 6 from memory?</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:30–7:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: MACRO — P, E, S of PESTLE</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write out P (Political), E (Economic), S (Social) with full definition and restaurant example each</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Thursday <span class="day-date">15 May</span></div><div class="day-subjects"><span class="subject-pill pill-bs">Business</span><span class="subject-pill pill-ls">Life Sciences</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: MACRO — T, L, E of PESTLE + full table</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write out T (Technology), L (Legal), E (Environmental) — definitions + restaurant examples</li><li>Compile a full PESTLE table: all 6 factors, definition, restaurant example on one page</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:15–6:15</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: Human Capital Management</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write the full HR cycle: recruitment, selection, induction, training and development, performance appraisal, termination</li><li>For each step: what does it mean and why does it matter — explain in your own words, don't just copy</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:30–7:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: DNA structure — first introduction</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Draw and label a DNA double helix: sugar-phosphate backbone, base pairs (A-T, G-C), hydrogen bonds</li><li>Make a cue card: "What are the 4 DNA bases and how do they pair?"</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Friday <span class="day-date">16 May</span></div><div class="day-subjects"><span class="subject-pill pill-bs">Business</span><span class="subject-pill pill-ls">Life Sciences</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: Labour Laws — LRA, BCEA, EEA</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>For each law: full name, what it protects, 3 key provisions, restaurant example</li><li>Draw a comparison table: what makes each law different from the others?</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:15–6:15</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: Corporate Governance + Social Responsibility</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>King Code principles — what are directors responsible for? Write notes</li><li>CSR and the triple bottom line (People, Planet, Profit) — define + restaurant examples</li><li>Make a cue card for each concept</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:30–7:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: RNA + Protein Synthesis intro</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Draw a comparison table: DNA vs RNA (structure, location, sugar, bases, function)</li><li>Write out the steps of transcription in order — where does it happen, what is produced?</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Saturday <span class="day-date">17 May</span></div><div class="day-subjects"><span class="subject-pill pill-bs">Business Studies</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: Ethics + Conflict Management + Marketing</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Ethics: define ethical vs unethical behaviour, write a code of ethics, give 3 restaurant examples of each</li><li>Conflict Management: define the 3 types of conflict, and 3 resolution strategies (negotiation, mediation, arbitration) — what's the difference between them?</li><li>Marketing: write out all 7 Ps with definition and restaurant example for each</li></ul></div></div>
+    <div class="session-break">Lunch break</div>
+    <div class="session"><div class="session-time">3:00–5:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: General Management + Org Performance + past paper Section A</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>General Management: 4 functions (planning, organising, leading, controlling) with definitions and restaurant examples. Management styles (autocratic, democratic, laissez-faire) — define each + pros/cons</li><li>Organisational Performance: productivity, profitability, TQM, SWOT — draw a SWOT for a restaurant</li><li>Do a full past IEB Section A (timed, 40 min) — mark it</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Sunday <span class="day-date">18 May</span></div><div class="day-subjects"><span class="subject-pill pill-bs">Business Studies</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: Past IEB Section B — timed practice</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Do a full Section B from a past IEB paper under timed conditions (60 min)</li><li>Mark it — highlight every topic you lost marks on</li><li>Spend remaining time rewriting correct answers for questions you got wrong</li></ul></div></div>
+    <div class="session-break">Lunch break</div>
+    <div class="session"><div class="session-time">3:00–5:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: Past IEB Section C — Business Report</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Study the business report format: heading, executive summary, introduction, findings, recommendations, conclusion</li><li>Do a Section C from a past paper (timed, 40 min) — mark it</li><li>Rewrite any section where you lost marks using correct format</li></ul></div></div>
+  </div>
+</div>
+</div>
+
+<!-- PREP WEEK 2 -->
+<div id="prep2" class="tab-content">
+<div class="motivation">"Every hour you put in now is marks in the bank."</div>
+<p class="section-label">19–25 May · Business consolidation + Life Sciences + English poetry begins · Study 4–7pm weekdays</p>
+<div class="week-label">Week 2 <span class="week-badge">19–25 May</span></div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Monday <span class="day-date">19 May</span></div><div class="day-subjects"><span class="subject-pill pill-bs">Business</span><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business: full review — all mind maps + flashcards</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Go through every mind map and flashcard from last week — test yourself by covering answers</li><li>List any topics that still feel uncertain — these are your priority for the next two weeks</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:15–6:15</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: Genetics — Mendel's laws + monohybrid cross</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write out Mendel's Law of Segregation and Law of Independent Assortment in plain English</li><li>Define: gene, allele, dominant, recessive, homozygous, heterozygous, genotype, phenotype — cue card for each</li><li>Draw and solve 3 monohybrid cross Punnett squares</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:30–7:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English: Seen Poetry — Constantly Risking Absurdity + Crossing Over</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>For each poem: theme, tone, mood, 2 poetic devices with quotes + effect</li><li>Write one exam-quality sentence: "The poet uses [device] to [effect]..."</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Tuesday <span class="day-date">20 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: Meiosis — all phases with diagrams</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Draw and label every phase of Meiosis I and Meiosis II — show what happens to chromosomes at each stage</li><li>Draw a comparison table: Mitosis vs Meiosis (purpose, divisions, daughter cells, genetic variation)</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:15–6:15</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: incomplete dominance + codominance + sex-linked</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Define incomplete dominance and codominance — how do they differ? Draw one Punnett square for each</li><li>Define sex-linked inheritance — why is it X-linked? Solve 2 sex-linked problems (e.g. colour blindness)</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:30–7:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English: Seen Poetry — For Oom Piet + Mirror</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>For each: theme, tone, 2 devices with quotes + effect</li><li>Write one sentence connecting each poem to a possible intertextual link</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Wednesday <span class="day-date">21 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: Protein Synthesis — transcription + translation</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write the full steps of transcription (where: nucleus; what: DNA → mRNA; how: RNA polymerase unwinds DNA)</li><li>Write the full steps of translation (where: ribosome; what: mRNA → protein; how: tRNA, codons, anticodons)</li><li>Draw a flow diagram: DNA → mRNA → protein, labelling each step</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:15–6:15</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: Mutations + DNA Technology</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Mutations: define point mutation + frameshift mutation — draw a diagram showing what each does to the DNA sequence. Write the causes and effects</li><li>DNA Technology: write notes on cloning, GMOs, forensic DNA fingerprinting, gene therapy — one paragraph each. Make 4 cue cards</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:30–7:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English: Seen Poetry — Namaqualand after Rain + Ozymandias</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>For each: theme, tone, 2 devices with quotes + effect</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Thursday <span class="day-date">22 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: Population Ecology</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Define population size + factors affecting it: birth rate, death rate, immigration, emigration</li><li>Draw and explain J-shaped (exponential) and S-shaped (logistic) growth curves — what causes each?</li><li>Write out all 5 species interactions: predation, competition, mutualism, commensalism, parasitism — define + example</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:15–6:15</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: Ecological Succession + Human Population</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Primary and secondary succession — draw a diagram showing stages from bare rock/cleared land to climax community</li><li>Human population: global growth trends, causes of population growth, 3 environmental impacts</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:30–7:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English: Seen Poetry — Remember + Stealing</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>For each: theme, tone, 2 devices with quotes + effect</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Friday <span class="day-date">23 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: Endocrine System</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Make a table: gland, hormone(s) produced, target organ/tissue, effect — cover pituitary, thyroid, adrenal, pancreas, ovaries, testes</li><li>Draw a body outline and mark where each gland is located</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:15–6:15</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: Human Reproduction</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Draw and label male and female reproductive systems</li><li>Write the stages of the menstrual cycle — what happens and which hormones are involved at each stage</li><li>Write notes on fertilisation and early pregnancy development</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:30–7:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English: Seen Poetry — Strangers Forever + Superstition</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>For each: theme, tone, 2 devices with quotes + effect</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Saturday <span class="day-date">24 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: Plant Reproduction + Animal Strategies + Evolution intro</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Plant reproduction: draw a flower and label reproductive parts — write steps of pollination, fertilisation, seed and fruit formation</li><li>Animal strategies: oviparous, viviparous, ovoviviparous — one example each. External vs internal fertilisation</li><li>Evolution intro: Lamarck's theory vs Darwin's theory — write the key differences</li></ul></div></div>
+    <div class="session-break">Lunch break</div>
+    <div class="session"><div class="session-time">3:00–5:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English: Seen Poetry — The Herb Garden + The Poet + The Sun Rising + These Fought in Any Case</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>For each poem: theme, tone, 2 devices + effect (spend approx 25 min per poem)</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Sunday <span class="day-date">25 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: Evolution continued + Experimental Design</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Darwin's natural selection: write the 4 key points (variation exists, variation is heritable, more offspring than can survive, best-adapted survive to reproduce)</li><li>Evidence for evolution: fossil record, comparative anatomy, molecular evidence — write notes on each</li><li>Natural vs artificial selection — comparison table</li><li>Speciation: reproductive isolation + geographic isolation — how do they lead to new species?</li><li>Experimental design: independent variable, dependent variable, controlled variables, hypothesis — cue card for each</li></ul></div></div>
+    <div class="session-break">Lunch break</div>
+    <div class="session"><div class="session-time">3:00–5:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English: Seen Poetry — Trespasser + Ulysses + unseen poetry approach</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Trespasser + Ulysses: theme, tone, 2 devices + effect each</li><li>Unseen poetry method: write down your annotation strategy (title, speaker, tone, imagery, structure, devices). Practise on one short unseen poem</li></ul></div></div>
+  </div>
+</div>
+</div>
+
+<!-- PREP WEEK 3 -->
+<div id="prep3" class="tab-content">
+<div class="motivation">"Three weeks of effort. A whole year's worth of marks."</div>
+<p class="section-label">26–31 May · Life Sciences consolidation + English Paper 1 skills + Afrikaans begins · Study 4–7pm weekdays</p>
+<div class="week-label">Week 3 <span class="week-badge">26–31 May</span></div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Monday <span class="day-date">26 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span><span class="subject-pill pill-afr">Afrikaans</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:15</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: genetics application — 5 past paper questions</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Find 5 genetics questions from past papers</li><li>For each: draw the Punnett square, identify the cross type, interpret the results</li><li>Mark your answers — rewrite any incorrect solutions with the correct reasoning</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:30–6:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English Paper 1: comprehension skills — theory + timed practice</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write notes on: writer's intention, tone, bias, emotive language, critical literacy (active/passive voice, who is quoted)</li><li>Do one timed comprehension question from a past paper (35 min) — mark it</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:45–7:00</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: STOMPI — read all rules from green study guide</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Read through all STOMPI rules carefully — understand each one before doing exercises tomorrow</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Tuesday <span class="day-date">27 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span><span class="subject-pill pill-afr">Afrikaans</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: timed data response + essay practice</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Do one full data-response question from a past paper — before answering: what is the independent variable? Dependent variable? What trend does the graph show?</li><li>Practise writing the opening of a sourced-based argumentative essay (intro paragraph only)</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:15–6:15</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English Paper 1: summary technique</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Prose summary: reduce a 400-word article to one paragraph of 150 words in your own words</li><li>Point form summary: same article in 7 bullet points</li><li>Text adaptation: take a formal text and rewrite the opening as a speech</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:30–7:00</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: STOMPI exercises</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Do at least 15 STOMPI exercises from your green study guide or past papers</li><li>Write out each correction and explain in writing why the original is wrong</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Wednesday <span class="day-date">28 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span><span class="subject-pill pill-afr">Afrikaans</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:15</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: master mind map — all topics connected</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>On a large page draw one master mind map connecting all topics: DNA → Protein Synthesis → Mutations → Meiosis → Genetics → Inheritance → Population Ecology → Life Processes → Evolution</li><li>Use colour coding — one colour per topic branch</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:30–6:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English Paper 1: visual + critical literacy</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write notes on analysing advertisements: target audience, persuasive language, layout, fonts, copy vs visual</li><li>Critical literacy: different perspectives, propaganda, included vs excluded, context shifts</li><li>Do one visual literacy question from a past paper — timed</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:45–7:00</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: tenses — write full table</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write out teenwoordige tyd, verlede tyd, toekomende tyd in a table — include regular and irregular verbs</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Thursday <span class="day-date">29 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span><span class="subject-pill pill-afr">Afrikaans</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: cue card review + Skills slides</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Flip through every cue card — put uncertain ones in a "weak" pile and go through them a second time</li><li>Review your experimental design Skills slides: GUS stain investigation — identify the variables</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:15–6:15</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English Paper 1: language + grammar exercises</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Concord: write 5 examples of concord errors and their corrections</li><li>Misrelated participle: define + 3 examples of errors and corrections</li><li>Sentence types: simple, compound, complex — write 2 of each</li><li>Do a grammar exercise from a past paper Q6 — mark it</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:30–7:00</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: tenses exercises + mixed grammar</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Do 15 tense-change exercises from past papers — write the full corrected sentence each time</li><li>Do 10 mixed STOMPI + tenses exercises</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Friday <span class="day-date">30 May</span></div><div class="day-subjects"><span class="subject-pill pill-ls">Life Sci</span><span class="subject-pill pill-eng">English</span><span class="subject-pill pill-afr">Afrikaans</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">4:00–5:30</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: full timed past paper</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Do a full Life Sciences past paper under timed conditions (90 min)</li><li>Mark it — write next to each wrong answer what you should have written and why</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">5:45–6:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English Paper 1: unseen poetry timed practice</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Find an unseen poem from a past paper — annotate it (title, speaker, tone, images, devices)</li><li>Write one full exam-quality response paragraph</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">6:45–7:00</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: Donker Web — summaries Voorgebeure + Ch 1–10</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write a 3-sentence summary for Voorgebeure and each of chapters 1–10</li><li>Underline unknown words — add them to your vocabulary list</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Saturday <span class="day-date">31 May</span></div><div class="day-subjects"><span class="subject-pill pill-eng">English</span><span class="subject-pill pill-afr">Afrikaans</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English Paper 1: full timed practice paper</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Do a full English Paper 1 past paper under exam conditions — time yourself, all 6 questions</li><li>Mark it — identify which question types lose you the most marks</li></ul></div></div>
+    <div class="session-break">Lunch break</div>
+    <div class="session"><div class="session-time">3:00–5:00</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: Donker Web summaries Ch 11–50 + characters + themes</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write summaries for chapters 11–50 (3 sentences each — work through as many as possible)</li><li>Write a character profile for each key character: name, role, how they develop</li><li>Identify 5 main themes — write one quote from the text as evidence for each</li></ul></div></div>
+  </div>
+</div>
+</div>
+<!-- EXAMS WEEK 1 -->
+<div id="exams1" class="tab-content">
+<div class="motivation">"One paper at a time. You have prepared for this."</div>
+<p class="section-label">2–5 June · First exam week</p>
+<div class="week-label">Exam Week 1 <span class="week-badge">2–5 June</span></div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Sunday <span class="day-date">1 June</span></div><div class="day-subjects"><span class="subject-pill pill-bs">Business prep</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business Studies: final full review</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Go through every mind map and flashcard — reading only, no new content</li><li>Re-read your business report format notes and your past paper marked answers</li><li>Remind yourself of the restaurant case study context</li></ul></div></div>
+    <div class="session-break">Lunch</div>
+    <div class="session"><div class="session-time">3:00–5:00</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Business Studies: weak areas + equipment check</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Re-read any topics you still feel unsure about — read your notes, don't rewrite</li><li>Pack your bag: blue/black pen, pencil, ruler, calculator</li><li>Early night — exam tomorrow morning</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card exam-day" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Monday <span class="day-date">2 June</span> — Business Studies EXAM</div><div class="day-subjects"><span class="subject-pill pill-bs">Exam 9:00–12:00</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">7:00–8:30</div><div class="session-block c-bs"><div class="session-header"><div class="session-title">Morning skim: all mind maps + flashcards</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Flip through all notes — reading only</li><li>Remind yourself of the restaurant case study</li><li>Eat breakfast, drink water</li></ul></div></div>
+    <div class="session-break">✏️ EXAM 9:00–12:00 — Business Studies (250 marks, 3 hrs)</div>
+    <div class="session"><div class="session-time">2:00–3:30</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: Donker Web key quotes + vocabulary</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Collect 10 important quotes: write the quote, chapter, and why it matters</li><li>Review your vocabulary list — quiz yourself on 15 words</li></ul></div></div>
+    <div class="session"><div class="session-time">3:30–5:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English Paper 1: final poetry revision — weakest poems</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Go through whichever poems you feel least confident about</li><li>Write one timed poetry response paragraph (20 min)</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Tuesday <span class="day-date">3 June</span></div><div class="day-subjects"><span class="subject-pill pill-afr">Afrikaans</span><span class="subject-pill pill-eng">English P1</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">8:00–9:30</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: sinstrukture + woordstrukture + kommunikasie</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Sinstrukture: do 10 sentence structure exercises — write corrected sentences with explanation</li><li>Woordstrukture: do 10 word structure exercises (prefixes, suffixes) — correct and explain each</li><li>Kommunikasie: define formal vs informal register — write one example of each</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">9:45–11:00</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: rapid poetry revision — all 17 poems</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Spend 4 min per poem — write: title, theme in one sentence, tone in one word, one key device</li><li>Tick each poem off as you go</li></ul></div></div>
+    <div class="session-break">After school</div>
+    <div class="session"><div class="session-time">4:00–5:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English Paper 1: intertextuality + comprehension drill</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Intertextuality: write notes on how to link a poem or extract to Othello, The White Tiger, or another seen poem — examiners want similarities in theme, tone, imagery, message</li><li>Do one full comprehension question from a past paper (35 min timed) — mark it, write down which question types lost you marks</li><li>Revise: statistical vs anecdotal evidence, vocabulary in context questions</li></ul></div></div>
+    <div class="session"><div class="session-time">5:30–7:00</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: sinstrukture + woordstrukture + final poem rapid revision</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Sinstrukture: do 10 sentence structure exercises — write corrected sentences with reasons</li><li>Woordstrukture: do 10 word structure exercises (prefixes, suffixes, roots) — correct and explain each</li><li>Spend final 15 min doing a rapid run through your weakest 5 Afrikaans poems</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card exam-day" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Wednesday <span class="day-date">4 June</span> — English Paper 1 EXAM</div><div class="day-subjects"><span class="subject-pill pill-eng">Exam 9:00–12:00</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">7:00–8:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">Final review: poems + comprehension notes + grammar</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Skim all poem notes — one card per poem</li><li>Re-read comprehension approach and grammar rules</li><li>Pack: pen, ruler, stapler</li></ul></div></div>
+    <div class="session-break">✏️ EXAM 9:00–12:00 — English Paper 1 (100 marks, 3 hrs)</div>
+    <div class="session"><div class="session-time">2:00–3:30</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: full grammar drill — STOMPI + tenses timed</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Do 20 STOMPI exercises from past papers — mark immediately, rewrite every error with explanation</li><li>Do 15 tense-change exercises — mark immediately, rewrite errors</li></ul></div></div>
+    <div class="session"><div class="session-time">3:30–5:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: cue card review + genetics practice</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Flip through all cue cards — weak pile gets a second pass</li><li>Do 2 genetics application questions from a past paper</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card exam-day" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Thursday <span class="day-date">5 June</span> — Life Sciences EXAM + PAT</div><div class="day-subjects"><span class="subject-pill pill-ls">Theory 9–12</span><span class="subject-pill pill-ls">PAT 13:30–15:00</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">7:00–8:30</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Final review: all cue cards + master mind map</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Flip through all cue cards quickly</li><li>Look over your master mind map — remind yourself how all topics connect</li><li>Pack: calculator, ruler, pen, pencil, eraser</li></ul></div></div>
+    <div class="session-break">✏️ EXAM 9:00–12:00 — Life Sciences Theory (160 marks, 3 hrs)</div>
+    <div class="session-break">✏️ PAT 13:30–15:00 — Life Sciences Practical (50 marks)</div>
+    <div class="session"><div class="session-time">5:00–6:00</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: Donker Web characters + themes (light review)</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Re-read character profiles and theme notes — just reading, no new writing</li></ul></div></div>
+  </div>
+</div>
+</div>
+
+<!-- EXAMS WEEK 2 -->
+<div id="exams2" class="tab-content">
+<div class="motivation">"You are more prepared than you think. Keep going."</div>
+<p class="section-label">6–10 June</p>
+<div class="week-label">Exam Week 2 <span class="week-badge">6–10 June</span></div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Friday <span class="day-date">6 June</span></div><div class="day-subjects"><span class="subject-pill pill-afr">Afrikaans</span><span class="subject-pill pill-des">Design</span><span class="subject-pill pill-mlit">Maths Lit</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">8:00–9:30</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: full mock — Donker Web essay-style response</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write a full essay-style answer on a Donker Web question (e.g. "Discuss the theme of [X] with reference to the text")</li><li>Focus on: using textual evidence, expressing ideas clearly in Afrikaans throughout</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">9:45–11:30</div><div class="session-block c-des"><div class="session-header"><div class="session-title">Design Theory: 5 design process phases + 3 process models</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write detailed notes on each phase: Ideation (brainstorming, research), Concept (sketches), Development (refining, testing), Production (making), Exhibition (presenting)</li><li>Write notes on Linear, Cyclic, Human-Centred models — define, explain differences, draw a diagram for each</li><li>Define all key terms: prototype, maquette, mood board, ergonomics, anthropometrics, infographic</li></ul></div></div>
+    <div class="session-break">After school</div>
+    <div class="session"><div class="session-time">4:00–5:30</div><div class="session-block c-des"><div class="session-header"><div class="session-title">Design Theory: communication terminology + visual analysis</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Define and find/draw a visual example of: symbol, pictogram, icon, sign, emblem, logo, branding, infographic, visual metaphor, allegory</li><li>Write notes on how to evaluate a design: composition, typography, colour, layout, design intent</li></ul></div></div>
+    <div class="session"><div class="session-time">5:30–7:00</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit: Simple + Compound Interest</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write the SI formula (SI = P×r×t) and CI formula (A = P(1+r)^n) — write each 3 times to memorise</li><li>Do 4 worked examples of each — show all working</li><li>Mark and identify where you make calculation errors</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Saturday <span class="day-date">7 June</span></div><div class="day-subjects"><span class="subject-pill pill-afr">Afrikaans</span><span class="subject-pill pill-des">Design</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Afrikaans: full timed mock paper — all 3 sections</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Do a full Afrikaans past paper: Section A (Taal), Section B (Poësie), Section C (Donker Web)</li><li>Time yourself — 2.5 hours total. Mark it. Write corrections for every wrong answer</li></ul></div></div>
+    <div class="session-break">Lunch</div>
+    <div class="session"><div class="session-time">3:00–5:00</div><div class="session-block c-des"><div class="session-header"><div class="session-title">Design Theory: Gestalt + Visual Analysis elements + principles</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Gestalt: define closure, proximity, similarity, continuation, law of pragnanz, common fate, figure and ground, contiguity — find one visual example of each</li><li>Visual Analysis elements: line, tone, shape/form, colour, texture, space — define each</li><li>Visual Analysis principles: unity, harmony, rhythm, proportion, balance, emphasis, contrast, gradation, movement — define each</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card exam-day" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Monday <span class="day-date">8 June</span> — Afrikaans EXAM</div><div class="day-subjects"><span class="subject-pill pill-afr">Exam 9:00–11:30</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">7:00–8:30</div><div class="session-block c-afr"><div class="session-header"><div class="session-title">Final review: STOMPI, tenses, poems, Donker Web</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Read through STOMPI rules and tense table</li><li>Skim poem notes — one sentence per poem</li><li>Read through Donker Web character profiles and theme notes</li><li>Pack: pens, ruler</li></ul></div></div>
+    <div class="session-break">✏️ EXAM 9:00–11:30 — Afrikaans (130 marks, 2.5 hrs)</div>
+    <div class="session"><div class="session-time">2:00–3:30</div><div class="session-block c-des"><div class="session-header"><div class="session-title">Design Theory: Memphis + Ettore Sottsass</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Memphis movement: when (1981–late 80s), where (Italy), why (reaction against minimalism), general style (bold colours, geometric shapes, mixed patterns)</li><li>Carlton Sideboard: describe in detail — form, colour, materials, function, design intent</li><li>Tahiti Lamp / Beverley Cabinet: describe in detail</li></ul></div></div>
+    <div class="session"><div class="session-time">3:30–5:00</div><div class="session-block c-des"><div class="session-header"><div class="session-title">Design Theory: Postmodernism + Philippe Starck + Deconstructivism + Hadid</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Postmodernism: context (1980–current), rejects minimalism, Eclecticism, Pluralism — general style notes</li><li>Philippe Starck: Juicy Salif Citrus Squeezer — detailed description. Louis Ghost/Table Gun lamp — detailed description</li><li>Deconstructivism: context (1990–current), fragmented forms, challenges conventional design — general style</li><li>Zaha Hadid: London Aquatics Centre — detailed description. Galaxy Soho — detailed description</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card exam-day" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Tuesday <span class="day-date">9 June</span> — Design Theory EXAM</div><div class="day-subjects"><span class="subject-pill pill-des">Exam 9:00–11:00</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">7:00–8:30</div><div class="session-block c-des"><div class="session-header"><div class="session-title">Final review: movements, designers, design process, communication terms</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Say aloud for each designer: name, movement, 2 works, key style words</li><li>Skim design process phases and communication terminology notes</li><li>Pack: pen, ruler, stapler</li></ul></div></div>
+    <div class="session-break">✏️ EXAM 9:00–11:00 — Design Theory (60 marks, 2 hrs)</div>
+    <div class="session"><div class="session-time">2:00–3:30</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit: percentage + ratio + rate + proportion</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Percentage: increase, decrease, of an amount, reverse percentage — 3 examples each</li><li>Ratio and rate: simplifying + applying to contexts — 4 examples</li><li>Proportion: direct and indirect — 3 examples each</li></ul></div></div>
+    <div class="session"><div class="session-time">3:30–5:00</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit: break-even + banking + investments + taxation + exchange rates</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Break-even: define, draw a graph, calculate break-even point from an example</li><li>Banking: read a bank statement, identify fees, debit vs credit</li><li>Taxation: calculate VAT (inclusive + exclusive), income tax from a tax table</li><li>Exchange rates: convert between currencies, buying vs selling rates</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card exam-day" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Wednesday <span class="day-date">10 June</span> — Maths Lit Paper 1 EXAM</div><div class="day-subjects"><span class="subject-pill pill-mlit">Exam 9:00–12:00</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">7:00–8:30</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Final review: Finance + Data Handling formulas</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Read through your formula reference card</li><li>Do 3 quick mental warm-up calculations</li><li>Pack: pen, sharp pencil, ruler, eraser, protractor, non-programmable calculator</li></ul></div></div>
+    <div class="session-break">✏️ EXAM 9:00–12:00 — Maths Lit Paper 1 (150 marks, 3 hrs)</div>
+    <div class="session"><div class="session-time">2:00–3:30</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit P2: Data Handling — graphs + statistics</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Mean, median, mode, quartiles, percentiles — calculate from a frequency table</li><li>Draw and interpret: bar graph, histogram, scatter plot, box and whisker plot</li><li>Growth charts: practise reading one from a past paper</li></ul></div></div>
+    <div class="session"><div class="session-time">3:30–5:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English Paper 2: Othello — plot summary act by act</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write a 4–5 sentence summary for each act of Othello (Acts 1–5)</li><li>Write a one-line description of each key character: Othello, Iago, Desdemona, Cassio, Emilia, Roderigo, Brabantio</li></ul></div></div>
+  </div>
+</div>
+</div>
+
+<!-- EXAMS WEEK 3 -->
+<div id="exams3" class="tab-content">
+<div class="motivation">"The finish line is this close. Don't stop now."</div>
+<p class="section-label">11–23 June · Final stretch</p>
+<div class="week-label">Exam Week 3 <span class="week-badge">11–19 June</span></div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Thursday <span class="day-date">11 June</span></div><div class="day-subjects"><span class="subject-pill pill-eng">English P2</span><span class="subject-pill pill-mlit">Maths Lit P2</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">8:00–9:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English P2: Othello — themes + 15 key quotations</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write notes on each theme: jealousy, race, manipulation, appearance vs reality, love, loyalty</li><li>Collect 15 key quotes — for each: write the quote, who says it, act/scene, what it shows</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">9:45–11:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English P2: Othello essay — full timed practice (600 words)</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write a full 600-word essay — intro (state your argument), 3 body paragraphs (point, embedded quote, explanation), conclusion</li><li>Time yourself: 45 min maximum</li></ul></div></div>
+    <div class="session-break">After school</div>
+    <div class="session"><div class="session-time">4:00–5:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English P2: White Tiger — plot + characters</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write a full plot summary of The White Tiger</li><li>Character profiles: Balram, Ashok, Pinky Madam, The Stork, Dharam — role + significance</li></ul></div></div>
+    <div class="session"><div class="session-time">5:30–7:00</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit P2: measurement — perimeter + area + volume</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Perimeter: rectangles, triangles, composite shapes — 4 examples</li><li>Area: rectangles, triangles, circles, composite shapes — 4 examples</li><li>Volume: rectangular prisms, cylinders — 3 examples</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Friday <span class="day-date">12 June</span></div><div class="day-subjects"><span class="subject-pill pill-eng">English P2</span><span class="subject-pill pill-mlit">Maths Lit P2</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">8:00–9:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English P2: White Tiger — themes + 15 key quotes</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Themes: class, corruption, entrepreneurship, freedom, identity, the rooster coop concept</li><li>Collect 15 key quotes — for each: quote, context, significance</li></ul></div></div>
+    <div class="session-break">15-min break</div>
+    <div class="session"><div class="session-time">9:45–11:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English P2: White Tiger essay — full timed practice (600 words)</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write a full 600-word essay — timed, 45 min max</li><li>Clear argument, embedded quotes (not block-quoted), close textual reference throughout</li></ul></div></div>
+    <div class="session-break">After school</div>
+    <div class="session"><div class="session-time">4:00–5:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English P2: transactional writing — speech + email + blog</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write format conventions for each: speech (opening, rhetorical devices, conclusion), email (subject line, greeting, sign-off), blog (engaging opening, personal voice)</li><li>Write one practice piece in each format (100 words each)</li></ul></div></div>
+    <div class="session"><div class="session-time">5:30–7:00</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit P2: time + timetables + metric conversions</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Time: 12hr vs 24hr — 10 examples. Time zone calculations — 5 examples</li><li>Timetables: read a bus/train timetable and answer questions from a past paper</li><li>Metric conversions: length, mass, volume — 5 examples each</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Saturday <span class="day-date">13 June</span></div><div class="day-subjects"><span class="subject-pill pill-eng">English P2</span><span class="subject-pill pill-mlit">Maths Lit P2</span><span class="subject-pill pill-ls">Life Sciences</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English P2: transactional writing — speech + email + blog (timed practice)</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write one full timed transactional piece in each of: speech, email, blog — 250–300 words each, 30 min per piece</li><li>For each: check your format conventions before you start — correct opening, register, sign-off</li><li>This is your dedicated transactional practice session before the longer formats tomorrow</li></ul></div></div>
+    <div class="session-break">Lunch break</div>
+    <div class="session"><div class="session-time">3:00–4:00</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit P2: imperial conversions + investments + loans recap</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Imperial conversions: practise converting miles to km, pounds to kg, gallons to litres — 5 examples each direction</li><li>Investments and loans: do 3 past paper questions on loan repayments and investment growth</li><li>Exchange rates: do 5 currency conversion problems — buying rate, selling rate, converting both ways</li></ul></div></div>
+    <div class="session"><div class="session-time">4:00–5:00</div><div class="session-block c-ls"><div class="session-header"><div class="session-title">Life Sciences: sourced-based argumentative essay structure</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write out the full essay structure: introduction (state your argument + reference the source), body paragraphs (each with a point, evidence from the source, your own explanation), conclusion (restate position, link back to sources)</li><li>Practise writing one full introduction paragraph using a provided source extract (find one in a past paper)</li><li>This is a compulsory SBA assessment — the format matters as much as the content</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Saturday <span class="day-date">14 June</span></div><div class="day-subjects"><span class="subject-pill pill-eng">English P2</span><span class="subject-pill pill-mlit">Maths Lit P2</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English P2: transactional — editorial + eulogy + newspaper column + open letter</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Write format conventions for each: editorial (formal, opinion, argument), eulogy (personal + formal tribute), newspaper column (opinion, engaging, first person), open letter (direct address, persuasive)</li><li>Write one practice piece in each format (100 words each)</li></ul></div></div>
+    <div class="session-break">Lunch</div>
+    <div class="session"><div class="session-time">3:00–5:00</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit P2: maps + scale + direction + elevations + probability</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Scale: read a scale drawing, calculate actual vs drawing measurement — 5 examples</li><li>Maps: grid references, compass bearings — 5 exercises</li><li>Elevations: identify top, front, side views of 3D objects</li><li>Temperature: Celsius to Fahrenheit (F = C×9/5 + 32) — 5 examples</li><li>Probability: fraction, decimal, percentage + tree diagrams — 5 examples</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Sunday <span class="day-date">15 June</span> <span class="day-off-badge">School Holiday</span></div><div class="day-subjects"><span class="subject-pill pill-eng">English P2</span><span class="subject-pill pill-mlit">Maths Lit P2</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English P2: full timed mock — Othello + White Tiger + transactional</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Othello essay: 45 min timed</li><li>White Tiger essay: 45 min timed</li><li>One transactional piece (250–300 words): 30 min timed</li></ul></div></div>
+    <div class="session-break">Lunch</div>
+    <div class="session"><div class="session-time">3:00–5:00</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit P2: full timed past paper</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Do a full Maths Lit Paper 2 past paper under timed conditions (3 hours)</li><li>Mark it and identify weak areas to revisit tomorrow</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Monday <span class="day-date">16 June</span> <span class="day-off-badge">Youth Day</span></div><div class="day-subjects"><span class="subject-pill pill-eng">English P2</span><span class="subject-pill pill-mlit">Maths Lit P2</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">10:00–12:00</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">English P2: final review — quotes, essay outlines, formats</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Read through all Othello + White Tiger quotes</li><li>Re-read essay outlines and structure notes</li><li>Review all 7 transactional format checklists</li></ul></div></div>
+    <div class="session-break">Lunch</div>
+    <div class="session"><div class="session-time">3:00–5:00</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit P2: targeted revision from mock + formula card</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Go through every wrong answer from yesterday's mock — redo each question correctly</li><li>Write out your formula reference card one final time</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card exam-day" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Tuesday <span class="day-date">17 June</span> — English Paper 2 EXAM</div><div class="day-subjects"><span class="subject-pill pill-eng">Exam 9:00–12:00</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">7:00–8:30</div><div class="session-block c-eng"><div class="session-header"><div class="session-title">Final review: essay outlines + key quotes + format checklist</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Read your essay outlines — remind yourself of your argument for each text</li><li>Skim key quotes</li><li>Pack: pen, ruler, stapler</li></ul></div></div>
+    <div class="session-break">✏️ EXAM 9:00–12:00 — English Paper 2 (100 marks, 3 hrs)</div>
+    <div class="session"><div class="session-time">2:00–4:00</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit P2: final full past paper timed</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Do one final full Paper 2 past paper — timed, mark it, note any remaining weak areas</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Wednesday <span class="day-date">18 June</span></div><div class="day-subjects"><span class="subject-pill pill-mlit">Maths Lit P2</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">8:00–11:00</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Maths Lit P2: final targeted revision — all formulas + measurement + maps</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Go through every formula on your reference card — do one example of each</li><li>Revise: scale drawings, compass bearings, elevations, temperature conversion, metric conversions</li><li>Rest in the afternoon — early night tonight</li></ul></div></div>
+  </div>
+</div>
+
+<div class="day-card exam-day" onclick="toggleDay(this)">
+  <div class="day-header"><div><div class="day-name">Thursday <span class="day-date">19 June</span> — Maths Lit Paper 2 EXAM</div><div class="day-subjects"><span class="subject-pill pill-mlit">Exam 9:00–12:00</span></div></div><span class="chevron">▼</span></div>
+  <div class="sessions">
+    <div class="session"><div class="session-time">7:00–8:30</div><div class="session-block c-mlit"><div class="session-header"><div class="session-title">Final review: formula card + measurement + maps</div><button class="star-btn" onclick="toggleStar(this,event)">☆</button></div><ul class="session-tasks"><li>Read your formula reference card</li><li>Pack: pen, sharp pencil, ruler, eraser, protractor, non-programmable calculator</li></ul></div></div>
+    <div class="session-break">✏️ EXAM 9:00–12:00 — Maths Lit Paper 2 (150 marks, 3 hrs)</div>
+    <div class="session-break" style="color:var(--rose);font-weight:600">🎉 Last written exam done! Design Practical Mon–Tue 22–23 June (school, 9–15).</div>
+  </div>
+</div>
+</div>
+<!-- CALENDAR -->
+<div id="calendar" class="tab-content">
+<div class="motivation">"See the full picture. Own the timeline."</div>
+<div class="cal-month">May 2026</div>
+<div class="cal-grid">
+  <div class="cal-head">Mon</div><div class="cal-head">Tue</div><div class="cal-head">Wed</div><div class="cal-head">Thu</div><div class="cal-head">Fri</div><div class="cal-head">Sat</div><div class="cal-head">Sun</div>
+  <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
+  <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
+  <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day study-cal"><div class="dn">14</div><span class="exam-tag">Study starts</span></div><div class="cal-day study-cal"><div class="dn">15</div></div><div class="cal-day study-cal"><div class="dn">16</div></div><div class="cal-day study-cal"><div class="dn">17</div></div>
+  <div class="cal-day study-cal"><div class="dn">18</div></div><div class="cal-day study-cal"><div class="dn">19</div></div><div class="cal-day study-cal"><div class="dn">20</div></div><div class="cal-day study-cal"><div class="dn">21</div></div><div class="cal-day study-cal"><div class="dn">22</div></div><div class="cal-day study-cal"><div class="dn">23</div></div><div class="cal-day study-cal"><div class="dn">24</div></div>
+  <div class="cal-day study-cal"><div class="dn">25</div></div><div class="cal-day study-cal"><div class="dn">26</div></div><div class="cal-day study-cal"><div class="dn">27</div></div><div class="cal-day study-cal"><div class="dn">28</div></div><div class="cal-day study-cal"><div class="dn">29</div></div><div class="cal-day study-cal"><div class="dn">30</div></div><div class="cal-day study-cal"><div class="dn">31</div></div>
+</div>
+
+<div class="cal-month">June 2026</div>
+<div class="cal-grid">
+  <div class="cal-head">Mon</div><div class="cal-head">Tue</div><div class="cal-head">Wed</div><div class="cal-head">Thu</div><div class="cal-head">Fri</div><div class="cal-head">Sat</div><div class="cal-head">Sun</div>
+  <div class="cal-day study-cal"><div class="dn">1</div><span class="exam-tag">Business prep</span></div>
+  <div class="cal-day exam-cal"><div class="dn">2</div><span class="exam-tag">📝 Business Studies 9–12</span></div>
+  <div class="cal-day study-cal"><div class="dn">3</div><span class="exam-tag">Eng P1 prep</span></div>
+  <div class="cal-day exam-cal"><div class="dn">4</div><span class="exam-tag">📝 English P1 9–12</span></div>
+  <div class="cal-day exam-cal"><div class="dn">5</div><span class="exam-tag">📝 Life Sci 9–12 + PAT 13:30</span></div>
+  <div class="cal-day study-cal"><div class="dn">6</div></div>
+  <div class="cal-day study-cal"><div class="dn">7</div></div>
+  <div class="cal-day exam-cal"><div class="dn">8</div><span class="exam-tag">📝 Afrikaans 9–11:30</span></div>
+  <div class="cal-day exam-cal"><div class="dn">9</div><span class="exam-tag">📝 Design Theory 9–11</span></div>
+  <div class="cal-day exam-cal"><div class="dn">10</div><span class="exam-tag">📝 Maths Lit P1 9–12</span></div>
+  <div class="cal-day study-cal"><div class="dn">11</div></div>
+  <div class="cal-day study-cal"><div class="dn">12</div></div>
+  <div class="cal-day study-cal"><div class="dn">13</div></div>
+  <div class="cal-day study-cal"><div class="dn">14</div></div>
+  <div class="cal-day holiday-cal"><div class="dn">15</div><span class="holiday-tag">School Holiday</span></div>
+  <div class="cal-day holiday-cal"><div class="dn">16</div><span class="holiday-tag">Youth Day</span></div>
+  <div class="cal-day exam-cal"><div class="dn">17</div><span class="exam-tag">📝 English P2 9–12</span></div>
+  <div class="cal-day study-cal"><div class="dn">18</div></div>
+  <div class="cal-day exam-cal"><div class="dn">19</div><span class="exam-tag">📝 Maths Lit P2 9–12</span></div>
+  <div class="cal-day empty"></div><div class="cal-day empty"></div>
+  <div class="cal-day exam-cal"><div class="dn">22</div><span class="exam-tag">🎨 Design Practical 9–15</span></div>
+  <div class="cal-day exam-cal"><div class="dn">23</div><span class="exam-tag">🎨 Design Practical 9–15</span></div>
+  <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
+</div>
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:.8rem;font-size:.68rem;">
+  <span style="display:flex;align-items:center;gap:.35rem;"><span style="width:12px;height:12px;border-radius:3px;background:rgba(139,26,58,.25);border:1px solid rgba(232,121,160,.4);display:inline-block"></span>Exam day</span>
+  <span style="display:flex;align-items:center;gap:.35rem;"><span style="width:12px;height:12px;border-radius:3px;background:rgba(124,45,96,.12);display:inline-block"></span>Study day</span>
+  <span style="display:flex;align-items:center;gap:.35rem;"><span style="width:12px;height:12px;border-radius:3px;background:rgba(61,31,53,.3);display:inline-block"></span>Holiday</span>
+</div>
+</div>
+
+<!-- EXAM DATES -->
+<div id="dates" class="tab-content">
+<div class="motivation">"Know your schedule. Own your schedule."</div>
+<table class="exam-table">
+  <thead><tr><th>Date</th><th>Subject</th><th>Time</th><th>Duration</th><th>Marks</th></tr></thead>
+  <tbody>
+    <tr><td class="exam-date-col">Mon 2 June</td><td class="exam-subject">Business Studies</td><td class="exam-time-col">09:00–12:00</td><td>3 hrs</td><td>250</td></tr>
+    <tr><td class="exam-date-col">Wed 4 June</td><td class="exam-subject">English Paper 1</td><td class="exam-time-col">09:00–12:00</td><td>3 hrs</td><td>100</td></tr>
+    <tr><td class="exam-date-col">Thu 5 June</td><td class="exam-subject">Life Sciences Theory</td><td class="exam-time-col">09:00–12:00</td><td>3 hrs</td><td>160</td></tr>
+    <tr><td class="exam-date-col">Thu 5 June</td><td class="exam-subject">Life Sciences PAT</td><td class="exam-time-col">13:30–15:00</td><td>1.5 hrs</td><td>50</td></tr>
+    <tr><td class="exam-date-col">Mon 8 June</td><td class="exam-subject">Afrikaans</td><td class="exam-time-col">09:00–11:30</td><td>2.5 hrs</td><td>130</td></tr>
+    <tr><td class="exam-date-col">Tue 9 June</td><td class="exam-subject">Design Theory</td><td class="exam-time-col">09:00–11:00</td><td>2 hrs</td><td>60</td></tr>
+    <tr><td class="exam-date-col">Wed 10 June</td><td class="exam-subject">Maths Lit Paper 1</td><td class="exam-time-col">09:00–12:00</td><td>3 hrs</td><td>150</td></tr>
+    <tr><td class="exam-date-col">Tue 17 June</td><td class="exam-subject">English Paper 2</td><td class="exam-time-col">09:00–12:00</td><td>3 hrs</td><td>100</td></tr>
+    <tr><td class="exam-date-col">Thu 19 June</td><td class="exam-subject">Maths Lit Paper 2</td><td class="exam-time-col">09:00–12:00</td><td>3 hrs</td><td>150</td></tr>
+    <tr><td class="exam-date-col">Mon 22 June</td><td class="exam-subject">Design Practical Day 1</td><td class="exam-time-col">09:00–15:00</td><td>6 hrs</td><td rowspan="2" style="vertical-align:middle">100</td></tr>
+    <tr><td class="exam-date-col">Tue 23 June</td><td class="exam-subject">Design Practical Day 2</td><td class="exam-time-col">09:00–15:00</td><td>6 hrs</td></tr>
+  </tbody>
+</table>
+<p style="font-size:.72rem;color:var(--muted);margin-top:1rem;line-height:1.6">Equipment: Business Studies — blue/black pen, pencil, ruler, calculator · English — pen, ruler, stapler · Life Sciences — calculator, ruler, pen, pencil, eraser · Afrikaans — pens, ruler · Design Theory — pen, ruler, stapler · Maths Lit — pen, sharp pencil, ruler, eraser, protractor, non-programmable calculator</p>
+</div>
+
+<!-- CHECKLIST -->
+<div id="checklist" class="tab-content">
+<div class="motivation">"Tick by tick. Every box is progress."</div>
+<p id="clProgress" class="checklist-progress">0 / 0 topics completed</p>
+
+<div class="check-subject">📋 Business Studies — 2 June</div>
+<div class="check-section">Environments</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">MICRO environment — all components defined + restaurant examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">MARKET environment — Porter's 6 Forces defined + restaurant examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">MACRO environment — full PESTLE table with restaurant examples</span></div>
+<div class="check-section">Human Capital &amp; Labour</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">HR cycle: recruitment, selection, induction, training, performance appraisal, termination</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Labour Laws: LRA — full name, what it covers, 3 key provisions</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Labour Laws: BCEA — full name, what it covers, 3 key provisions</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Labour Laws: EEA — full name, what it covers, 3 key provisions</span></div>
+<div class="check-section">Management &amp; Governance</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">General Management: 4 functions (planning, organising, leading, controlling)</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Management styles: autocratic, democratic, laissez-faire — pros/cons of each</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Corporate Governance: King Code principles, directors' responsibilities</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Social Responsibility: CSR, triple bottom line, restaurant examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Ethics: ethical vs unethical behaviour, code of ethics</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Conflict Management: types of conflict, negotiation/mediation/arbitration</span></div>
+<div class="check-section">Marketing &amp; Performance</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Marketing: all 7 Ps with restaurant examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Organisational Performance: productivity, profitability, TQM, SWOT analysis</span></div>
+<div class="check-section">Practice</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Past IEB Section A — completed + marked</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Past IEB Section B — completed + marked</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Past IEB Section C (Business Report) — completed + marked</span></div>
+
+<div class="check-subject">📖 English Paper 1 — 4 June</div>
+<div class="check-section">Comprehension Skills</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Writer's intention, tone, attitude, effect on reader</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Bias, emotive language, generalisation, stereotype, use of pronouns</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Critical literacy: active/passive voice, who is quoted/not quoted</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Literary terms: hyperbole, innuendo, euphemism, malapropism, irony, satire, parody</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Persuasive language: advertising techniques, propaganda, rhetorical devices</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Register, vocabulary, diction, statistical vs anecdotal evidence</span></div>
+<div class="check-section">Summary</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Prose summary technique (one paragraph, 150 words, own words)</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Point form summary technique</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Adapting text for new purpose/audience (formal → speech/email)</span></div>
+<div class="check-section">Seen Poetry — all 16 poems</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Constantly Risking Absurdity — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Crossing Over — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">For Oom Piet — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Mirror — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Namaqualand after Rain — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Ozymandias — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Remember — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Stealing — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Strangers Forever — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Superstition — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">The Herb Garden — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">The Poet — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">The Sun Rising — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">These Fought in Any Case — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Trespasser — theme, tone, 2 devices + effect</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Ulysses — theme, tone, 2 devices + effect</span></div>
+<div class="check-section">Visual Literacy + Language</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Visual/critical literacy: advertisements, cartoons, infographics — analysis approach</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Unseen poetry: annotation method practised on at least 1 unseen poem</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Grammar: concord, misrelated participle, sentence types, punctuation</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Full timed Paper 1 practice — completed + marked</span></div>
+
+<div class="check-subject">🔬 Life Sciences — 5 June</div>
+<div class="check-section">DNA, Genetics &amp; Genetic Engineering</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">DNA structure: double helix, nucleotides, base pairing (A-T, G-C)</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">RNA: types (mRNA, tRNA, rRNA), differences from DNA</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Protein synthesis: transcription (full steps) + translation (full steps)</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Mutations: point mutation + frameshift mutation — diagrams + causes</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">DNA technology: cloning, GMOs, forensic fingerprinting, gene therapy</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Meiosis: all phases drawn + labelled, comparison to mitosis</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Mendel's laws: Law of Segregation + Law of Independent Assortment</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Monohybrid cross: 3 practice Punnett squares completed</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Dihybrid cross: 2 practice Punnett squares completed</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Incomplete dominance + codominance: defined + Punnett squares</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Sex-linked inheritance: X-linked traits, 2 practice problems</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Genetic engineering: techniques + ethical implications</span></div>
+<div class="check-section">Population Ecology</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Population size: birth rate, death rate, immigration, emigration</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Population growth curves: J-curve vs S-curve — diagrams + explanation</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Species interactions: predation, competition, mutualism, commensalism, parasitism</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Ecological succession: primary + secondary — stages diagram</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Human population: growth trends + environmental impacts</span></div>
+<div class="check-section">Life Processes</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Endocrine system: glands, hormones, target organs — full table</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Flowering plant reproduction: pollination, fertilisation, seed + fruit formation</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Animal reproductive strategies: oviparous, viviparous, internal/external fertilisation</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Human reproduction: male + female systems, menstrual cycle, fertilisation</span></div>
+<div class="check-section">Evolution + Practical Skills</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Evolution: Lamarck vs Darwin — key differences</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Natural selection: 4 key points, evidence (fossil, anatomy, molecular)</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Natural vs artificial selection — comparison table</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Speciation: reproductive isolation + geographic isolation</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Experimental design: variables, hypothesis, GUS stain Skills slides</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Full timed past paper — completed + marked</span></div>
+
+<div class="check-subject">🇿🇦 Afrikaans — 8 June</div>
+<div class="check-section">Taal (Grammar)</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">STOMPI: all rules studied from green guide + 20 exercises completed</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Tenses: teenwoordige/verlede/toekomende tyd table + 15 exercises</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Sinstrukture: 10 exercises completed</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Woordstrukture: 10 exercises completed</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Kommunikasie: formal vs informal register — examples written</span></div>
+<div class="check-section">Poësie — all 17 poems</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Aandeelhouer — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Daarom — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Die wêreld het so klein geword — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Die Tweegeveg — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Klein Geloof — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Kleurblind — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Krisis — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Mamma kan ek nie sê nie — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Palimpses — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Rondom my — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Sondagaande — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Staan op! — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Sterrekyker — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Strelitzia — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Taylor Swift — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Touloper — theme, tone, key device</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Vraagteken — theme, tone, key device</span></div>
+<div class="check-section">Donker Web</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Voorgebeure + Ch 1–10: 3-sentence summaries written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Chapters 11–20: 3-sentence summaries written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Chapters 21–30: 3-sentence summaries written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Chapters 31–40: 3-sentence summaries written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Chapters 41–50: 3-sentence summaries written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Key characters: profiles written for all main characters</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">5 main themes identified with textual evidence</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">10 important quotes collected with explanation</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Vocabulary list built — at least 20 words</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Full timed mock paper — completed + marked</span></div>
+
+<div class="check-subject">🎨 Design Theory — 9 June</div>
+<div class="check-section">Section A: Literacy</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Design Process: all 5 phases (Ideation, Concept, Development, Production, Exhibition)</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Process models: Linear, Cyclic, Human Centred — defined + diagrams</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Key terms: prototype, concept sketches, maquette, mood board, ergonomics, anthropometrics</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Multifunctionality: clear definition + examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Communication: symbol, pictogram, icon, sign, emblem, logo, branding — all defined + visual example</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Visual metaphor, allegory, irony, parody — defined + examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Gestalt principles: closure, proximity, similarity, continuation, pragnanz, common fate, figure/ground, contiguity</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Visual Analysis elements: line, tone, shape/form, colour, texture, space</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Visual Analysis principles: unity, harmony, rhythm, proportion, balance, emphasis, contrast, gradation, movement</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Business terms: all 10 terms from study notes understood</span></div>
+<div class="check-section">Section B: Design History</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Memphis: context, general style written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Ettore Sottsass: Carlton Sideboard — detailed description</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Ettore Sottsass: Tahiti Lamp / Beverley Cabinet — detailed description</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Postmodernism: context, general style written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Philippe Starck: Juicy Salif Citrus Squeezer — detailed description</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Philippe Starck: Louis Ghost / Table Gun lamp — detailed description</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Deconstructivism: context, general style written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Zaha Hadid: London Aquatics Centre — detailed description</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Zaha Hadid: Galaxy Soho — detailed description</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Essay structure: intro + 3 movement paragraphs + conclusion outline written</span></div>
+
+<div class="check-subject">📊 Maths Lit Paper 1 — 10 June</div>
+<div class="check-section">Finance (60%)</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Simple Interest: formula + 4 worked examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Compound Interest: formula + 4 worked examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Percentage: increase, decrease, of amount, reverse — 3 examples each</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Ratio and Rate: simplifying + real-context problems</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Proportion: direct + indirect — examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Break-even: definition, graph, calculation</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Banking: reading bank statements, debit vs credit, fees</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Investments and loans: repayment calculations</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Taxation: VAT (inclusive + exclusive), income tax from a tax table</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Exchange rates: converting currencies, buying vs selling rates</span></div>
+<div class="check-section">Data Handling (35%)</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Mean, median, mode, range — from raw data + frequency table</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Quartiles + percentiles: calculated + interpreted</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Bar graphs + pie charts: read, interpret, draw</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Histograms: read + interpret</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Scatter plots: plot points, identify trend, line of best fit</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Box and whisker plots: draw + interpret (5-number summary)</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Growth charts: read + interpret from a past paper</span></div>
+<div class="check-section">Probability (5%)</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Probability: fraction, decimal, percentage expressions + tree diagrams</span></div>
+
+<div class="check-subject">📝 English Paper 2 — 17 June</div>
+<div class="check-section">Othello</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Othello: full plot summary (act by act)</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Othello: all key characters — role + significance</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Othello: themes — jealousy, race, manipulation, appearance vs reality, love, loyalty</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Othello: 15 key quotations with context + significance</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Othello: full 600-word timed essay practice completed</span></div>
+<div class="check-section">The White Tiger</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">White Tiger: full plot summary</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">White Tiger: all key characters — role + significance</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">White Tiger: themes — class, corruption, entrepreneurship, freedom, identity, rooster coop</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">White Tiger: 15 key quotations with context + significance</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">White Tiger: full 600-word timed essay practice completed</span></div>
+<div class="check-section">Transactional Writing — all 7 formats</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Speech: format + conventions + practice piece written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Email: format + conventions + practice piece written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Blog: format + conventions + practice piece written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Editorial: format + conventions + practice piece written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Eulogy: format + conventions + practice piece written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Newspaper Column: format + conventions + practice piece written</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Open Letter: format + conventions + practice piece written</span></div>
+
+<div class="check-subject">📐 Maths Lit Paper 2 — 19 June</div>
+<div class="check-section">Maps, Plans &amp; Representations (40%)</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Scale: reading + calculating from scale drawings — 5 examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Maps: grid references, compass bearings — 5 exercises</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Direction and bearing: N/S/E/W, 8-point compass</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Views and elevations: top, front, side views of 3D objects</span></div>
+<div class="check-section">Measurement (55%)</div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Time: 12hr/24hr conversion, time zones, schedules — 10 examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Timetables: reading + calculating from a timetable</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Metric conversions: length, mass, volume — 5 examples each</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Imperial conversions: metric to/from imperial</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Perimeter: standard + composite shapes — 4 examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Area: standard + composite shapes — 4 examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Volume: rectangular prisms + cylinders — 3 examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Temperature: Celsius to Fahrenheit — formula + 5 examples</span></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Full timed Paper 2 past paper — completed + marked</span></div>
+</div>
+
+<!-- TIPS -->
+<div id="tips" class="tab-content">
+<div class="motivation">"The brain that studies wins."</div>
+<div class="tip-card" style="border-color:rgba(232,121,160,.4)"><h3>🔴 Afrikaans — most urgent</h3><p>Your teacher flagged a zero on the Donker Web literature test. This puts your overall average at risk. Afrikaans needs daily attention — STOMPI and tenses through exercises (not just writing out rules), chapter summaries for Donker Web, and a growing vocabulary list. Use your green study guide as your main resource.</p></div>
+<div class="tip-card" style="border-color:rgba(232,121,160,.35)"><h3>🔴 Life Sciences — apply, don't just memorise</h3><p>You are good at rote learning — the gap is applying genetics concepts. Work through Punnett squares and data-response questions actively. Your teacher recommended mind maps and cue cards specifically for you. Attend Thursday support sessions at school.</p></div>
+<div class="tip-card" style="border-color:rgba(168,61,128,.35)"><h3>⚠️ Design — workbook completion</h3><p>The IEB moderates your workbook before June exams. Every unfinished page has a mark attached. Be fully present during all school Design sessions and use weekend time to catch up pages.</p></div>
+<div class="tip-card" style="border-color:rgba(168,61,128,.3)"><h3>⚠️ English — poetry + comprehension</h3><p>Your essays are already strong. Target poetry responses (timed, structured) and comprehension (writer's intention, tone, critical literacy, bias) — do these under timed conditions regularly.</p></div>
+<div class="tip-card" style="border-color:rgba(124,45,96,.3)"><h3>⚠️ Business Studies — depth over lists</h3><p>Your effort is excellent. The gap is depth — don't just list, explain. Work through past IEB papers weekly and apply everything to the restaurant industry case study.</p></div>
+<div class="tip-card" style="border-color:rgba(124,45,96,.3)"><h3>⚠️ Maths Lit — past papers, consistently</h3><p>You have the ability. Work through past papers and class exercises regularly, mark them immediately, and understand every wrong answer before moving on. Keep a formula reference card.</p></div>
+<div class="tip-card"><h3>🍅 Study in short bursts</h3><p>Work for 45–50 minutes, then take a 15-minute break. Your brain consolidates memory during breaks — they are part of studying, not a reward for finishing.</p></div>
+<div class="tip-card"><h3>✍️ Write things out by hand</h3><p>Copying by hand forces your brain to process information. Diagrams, mind maps, and cue cards are far more effective than re-reading notes.</p></div>
+<div class="tip-card"><h3>🌙 Sleep is non-negotiable</h3><p>Memory forms during sleep. Aim for 8 hours every night during exam period. Your rested brain will recall what your tired one forgets.</p></div>
+<div class="tip-card"><h3>📝 Read the whole paper first</h3><p>Spend the first 5 minutes reading through the full paper before writing. This helps you plan time, find easier questions, and reduce anxiety.</p></div>
+<div class="tip-card"><h3>💙 When motivation disappears</h3><p>Start with the smallest, easiest task on the list. You don't need to feel motivated to begin — begin, and the feeling often follows.</p></div>
+</div>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+/* ── STORAGE KEYS ── */
+const STARS_KEY = 'sienna_stars_v1';
+const CHECKS_KEY = 'sienna_checks_v1';
+
+/* ── SAVE / LOAD ── */
+function saveStars(){
+  const state={};
+  document.querySelectorAll('.star-btn').forEach((btn,i)=>{
+    state[i]=btn.classList.contains('starred');
+  });
+  try{localStorage.setItem(STARS_KEY,JSON.stringify(state));}catch(e){}
+}
+function loadStars(){
+  try{
+    const raw=localStorage.getItem(STARS_KEY);
+    if(!raw)return;
+    const state=JSON.parse(raw);
+    document.querySelectorAll('.star-btn').forEach((btn,i)=>{
+      if(state[i]){
+        btn.classList.add('starred');
+        btn.textContent='⭐';
+        const block=btn.closest('.session-block');
+        if(block)block.classList.add('completed');
+      }
+    });
+  }catch(e){}
+}
+function saveChecks(){
+  const state={};
+  document.querySelectorAll('.check-item').forEach((item,i)=>{
+    state[i]=item.classList.contains('checked');
+  });
+  try{localStorage.setItem(CHECKS_KEY,JSON.stringify(state));}catch(e){}
+}
+function loadChecks(){
+  try{
+    const raw=localStorage.getItem(CHECKS_KEY);
+    if(!raw)return;
+    const state=JSON.parse(raw);
+    document.querySelectorAll('.check-item').forEach((item,i)=>{
+      if(state[i]){
+        item.classList.add('checked');
+        item.querySelector('.check-box').textContent='✓';
+      }
+    });
+  }catch(e){}
+}
+
+/* ── RESET (exposed globally for the reset button) ── */
+function resetAll(){
+  if(!confirm('Reset all stars and checklist ticks? This cannot be undone.'))return;
+  try{localStorage.removeItem(STARS_KEY);localStorage.removeItem(CHECKS_KEY);}catch(e){}
+  document.querySelectorAll('.star-btn').forEach(btn=>{
+    btn.classList.remove('starred');btn.textContent='☆';
+    const block=btn.closest('.session-block');
+    if(block)block.classList.remove('completed');
+  });
+  document.querySelectorAll('.check-item').forEach(item=>{
+    item.classList.remove('checked');
+    item.querySelector('.check-box').textContent='';
+  });
+  updateProgress();updateChecklistProgress();
+}
+
+/* ── CORE FUNCTIONS ── */
+function showTab(id){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+function toggleDay(card){
+  if(card.classList.contains('day-off'))return;
+  card.classList.toggle('open');
+}
+function toggleStar(btn,e){
+  e.stopPropagation();
+  const block=btn.closest('.session-block');
+  btn.classList.toggle('starred');
+  btn.textContent=btn.classList.contains('starred')?'⭐':'☆';
+  block.classList.toggle('completed',btn.classList.contains('starred'));
+  updateProgress();
+  saveStars();
+}
+function toggleCheck(item){
+  item.classList.toggle('checked');
+  item.querySelector('.check-box').textContent=item.classList.contains('checked')?'✓':'';
+  updateChecklistProgress();
+  saveChecks();
+}
+function updateProgress(){
+  const total=document.querySelectorAll('.star-btn').length;
+  const done=document.querySelectorAll('.star-btn.starred').length;
+  const pct=total>0?Math.round(done/total*100):0;
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progStars').textContent='⭐ '+done+' star'+(done===1?'':'s');
+  document.querySelectorAll('.day-card:not(.day-off)').forEach(card=>{
+    const btns=card.querySelectorAll('.star-btn');
+    const starred=card.querySelectorAll('.star-btn.starred').length;
+    card.classList.toggle('done',btns.length>0&&starred===btns.length);
+  });
+}
+function updateChecklistProgress(){
+  const total=document.querySelectorAll('.check-item').length;
+  const done=document.querySelectorAll('.check-item.checked').length;
+  const el=document.getElementById('clProgress');
+  if(el)el.textContent=done+' / '+total+' topics completed';
+}
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  /* add done badges */
+  document.querySelectorAll('.day-card:not(.day-off)').forEach(card=>{
+    const nameEl=card.querySelector('.day-name');
+    if(!nameEl)return;
+    const badge=document.createElement('span');
+    badge.className='done-badge';
+    badge.textContent='✓ done';
+    nameEl.appendChild(badge);
+  });
+  /* restore saved state */
+  loadStars();
+  loadChecks();
+  updateProgress();
+  updateChecklistProgress();
+});
+</script>
+</body>
+</html>
